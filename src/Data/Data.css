@@ -1,0 +1,10 @@
+.ContainerItems {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    justify-content: space-evenly;
+    background-color: #F15556;
+    border-radius: 30px;
+    padding-top: 50px;
+}
