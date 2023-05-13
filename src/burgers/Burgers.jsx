@@ -1,10 +1,9 @@
 import "./Burgers.css";
 import Data from "../Data/Data";
-function Burgers({ title, description, image, price, data, setItem, key }) {
-  function addBurger() {
-    setItem([...Data, data]);
+function Burgers({ title, description, image, price, data, setItem }) {
+  function addBurger(event) {
+    event.preventDefault(), setItem([data, ...Data]);
     console.log(...Data);
-    console.log(key);
   }
 
   return (
