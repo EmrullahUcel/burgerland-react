@@ -1,68 +1,61 @@
-import React, { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import {
+  deleteBurger,
+  increment,
+  decrement,
+} from "../slice/sliceFolder/BurgerSlice";
+const Basket = () => {
+  const basketBurgers = useSelector((state) => state.burgers.basket);
+  const dispatch = useDispatch();
+  const totalprice = basketBurgers.reduce(
+    (total, burger) => total + burger.price * burger.quantity,
+    0
+  );
 
-const Basket = ({ selectedBurger, setSelectedBurger }) => {
+  return (
+    <div className="flex flex-wrap">
+      {totalprice}
+      {basketBurgers.map((burger) => {
+        // const price = basketBurgers.map(burger => burger.price)
+        // const quantity = basketBurgers.map(burger => burger.quantity)
 
-    const handleIncrement = (id) => {
-        const updatedBasket = selectedBurger.map((burger) => {
-            if (burger.id === id) {
-                return {
-                    ...burger,
-                    quantity: burger.quantity + 1,
-                };
-            }
-            return burger;
-        });
-        setSelectedBurger(updatedBasket);
-    };
-
-    const handleDecrement = (id) => {
-        const updatedBasket = selectedBurger.map((burger) => {
-            if (burger.id === id && burger.quantity > 1) {
-                return {
-                    ...burger,
-                    quantity: burger.quantity - 1,
-                };
-            }
-            return burger;
-        });
-        setSelectedBurger(updatedBasket);
-    };
-
-    const calculateTotalPrice = () => {
-        let totalPrice = 0;
-        selectedBurger.forEach((item) => {
-            totalPrice += item.price * item.quantity;
-        });
-        return totalPrice;
-    };
-
-
-    return (
-        <div className="text-center">
-            <h1 className="font-extrabold text-4xl">Sepetiniz</h1>
-            <h3><span>Toplam fiyat {calculateTotalPrice() + " " + "TL"}</span></h3>
-            <div className="w-full h-auto flex flex-wrap items-center justify-start">
-                {selectedBurger.map((burger) => (
-                    <div key={burger.id} className="w-60 h-96 m-4 mb-2 flex flex-col items-center">
-                        <img className="w-60 h-40" src={burger.image} alt={burger.title} />
-                        <p>{burger.title}</p>
-                        <p>{burger.description}</p>
-                        <span>{burger.price}</span>
-                        <div>
-                            <button onClick={() => handleDecrement(burger.id)} className="border border-solid p-2">
-                                -
-                            </button>
-                            <span>{burger.quantity}</span>
-                            <button onClick={() => handleIncrement(burger.id)} className="border border-solid p-2">
-                                +
-                            </button>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-        </div>
-    );
+        return (
+          <div
+            className="shadow-2xl mx-5 my-4 w-52 h-96 text-center relative "
+            key={burger.id}
+          >
+            <img
+              className="w-full h-32"
+              src={burger.image}
+              alt={burger.title}
+            />
+            <h1>{burger.title}</h1>
+            <p>{burger.description}</p>
+            <p>{burger.price * burger.quantity} ₺</p>
+            <button
+              className="mx-2"
+              onClick={() => dispatch(decrement(burger))}
+            >
+              -
+            </button>
+            <span>{burger.quantity}</span>
+            <button
+              className="mx-2"
+              onClick={() => dispatch(increment(burger))}
+            >
+              +
+            </button>
+            <button
+              onClick={() => dispatch(deleteBurger(burger))}
+              className="border border-blue-400 absolute bottom-[5%] left-[30%]"
+            >
+              Sepetten çıkar
+            </button>
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Basket;
