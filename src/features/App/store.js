@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import burgerReducer from "../../slice/sliceFolder/burgerSlice";
+import burgerReducer from "/src/slice/sliceFolder/BurgerSlice.jsx";
 
 
 
