@@ -1,5 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { SlBasket } from "react-icons/sl";
+import { GiHamburger } from "react-icons/gi";
+import { BiHomeAlt2 } from "react-icons/bi";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
@@ -11,25 +13,26 @@ const Navbar = () => {
     (total, burger) => total + burger.quantity,
     0
   );
-  console.log(basketQuantity);
 
   return (
-    <div className="flex w-full h-24 bg-yellow-200 items-center justify-between">
+    <div className="flex w-full h-24 bg-yellow-200 items-center justify-between ">
       <div className="w-[60%] ml-[5%] flex">
         <NavLink
           activeClassName="active"
-          className="mx-4 "
+          className="mx-4 flex items-center "
           to="/"
         >
           Ana Sayfa
+          <BiHomeAlt2 className="absolute ml-20 mb-1" />
         </NavLink>
-        <NavLink className="mx-4" to="/Burgers">
+        <NavLink className="mx-4 flex items-center" to="/Burgers">
           Burgerler
+          <GiHamburger className="text-amber-700 absolute ml-[70px] mb-1" />
         </NavLink>
         <NavLink className="mx-4 w-28 flex items-center" to="/Basket">
           Sepet
-          <SlBasket className="ml-3 " />
-          <p className="bg-red-300 border-solid w-5 h-5 rounded-full flex justify-center items-center text-[13px] absolute ml-16 mb-5">
+          <SlBasket className="ml-12 mb-1 text-red-600 absolute " />
+          <p className="text-[13px] absolute ml-[60px] mb-5">
             {basketQuantity}
           </p>
         </NavLink>

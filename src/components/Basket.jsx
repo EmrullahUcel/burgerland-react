@@ -3,6 +3,7 @@ import {
   deleteBurger,
   increment,
   decrement,
+  removeBasket,
 } from "../slice/sliceFolder/BurgerSlice";
 const Basket = () => {
   const basketBurgers = useSelector((state) => state.burgers.basket);
@@ -54,6 +55,7 @@ const Basket = () => {
           </div>
         );
       })}
+      <button onClick={()=> dispatch(removeBasket())}>sepeti boşalt</button>
     </div>
   );
 };

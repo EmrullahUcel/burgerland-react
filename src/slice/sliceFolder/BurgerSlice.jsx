@@ -38,9 +38,12 @@ const burgerSlice = createSlice({
         }
       }
     },
+    removeBasket : (state , action) =>{
+      state.basket = []
+    }
   },
 });
 
-export const { addToBasket, deleteBurger, decrement, increment } =
+export const { addToBasket, deleteBurger, decrement, increment , removeBasket} =
   burgerSlice.actions;
 export default burgerSlice.reducer;
