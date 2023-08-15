@@ -6,7 +6,7 @@ import MainContent from "./components/MainContent";
 
 const App = () => {
   return (
-    <>
+    <div className="">
       <div className="flex flex-col">
         <Navbar />
       </div>
@@ -15,7 +15,8 @@ const App = () => {
         <Route path="/Basket" element={<Basket />} />
         <Route path="/Burgers" element={<BurgerItems />} />
       </Routes>
-    </>
+    </div>
+  
   );
 };
 

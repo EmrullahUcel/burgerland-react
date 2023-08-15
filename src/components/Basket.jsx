@@ -1,10 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
+import slideVariants from "./mainContents/variants/slideVariants";
+import { motion } from "framer-motion";
 import {
   deleteBurger,
   increment,
   decrement,
   removeBasket,
 } from "../slice/sliceFolder/BurgerSlice";
+
 const Basket = () => {
   const basketBurgers = useSelector((state) => state.burgers.basket);
   const dispatch = useDispatch();
@@ -14,16 +17,25 @@ const Basket = () => {
   );
 
   return (
-    <div className="flex flex-wrap">
+    <motion.div
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{ duration: 1 }}
+      variants={slideVariants}
+      className="flex flex-wrap"
+    >
       {totalprice}
       {basketBurgers.map((burger) => {
-        // const price = basketBurgers.map(burger => burger.price)
-        // const quantity = basketBurgers.map(burger => burger.quantity)
-
         return (
-          <div
-            className="shadow-2xl mx-5 my-4 w-52 h-96 text-center relative "
+          <motion.div
             key={burger.id}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 1 }}
+            variants={slideVariants}
+            className="shadow-2xl mx-5 my-4 w-52 h-96 text-center relative "
           >
             <img
               className="w-full h-32"
@@ -52,11 +64,11 @@ const Basket = () => {
             >
               Sepetten çıkar
             </button>
-          </div>
+          </motion.div>
         );
       })}
-      <button onClick={()=> dispatch(removeBasket())}>sepeti boşalt</button>
-    </div>
+      <button onClick={() => dispatch(removeBasket())}>sepeti boşalt</button>
+    </motion.div>
   );
 };
 

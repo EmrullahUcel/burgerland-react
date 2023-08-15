@@ -5,9 +5,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'main-hero': "url('/src/images/burgir.png') "
-      }
+
     },
   },
 
